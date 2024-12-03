@@ -12,11 +12,12 @@ ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
-# Installeer de community nodes als root
-RUN npm install -g n8n-nodes-youtube-transcript@latest
+# Installeer pnpm en de community nodes
+RUN npm install -g pnpm && \
+    pnpm install -g n8n-nodes-youtube-transcript@latest
 
 # Maak een wrapper script voor de startup
-RUN echo '#!/bin/sh\nnpm install -g n8n-nodes-youtube-transcript@latest\nsu -c "n8n start" node' > /start.sh && \
+RUN echo '#!/bin/sh\npnpm install -g n8n-nodes-youtube-transcript@latest\nsu -c "n8n start" node' > /start.sh && \
     chmod +x /start.sh
 
 # Gebruik het wrapper script als entrypoint
