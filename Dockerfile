@@ -11,13 +11,7 @@ RUN apk update && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Setup pnpm en installeer de community nodes
-RUN pnpm setup && \
-    pnpm install -g n8n-nodes-youtube-transcript@latest
+# Installeer de community nodes met force optie
+RUN npm install -g n8n-nodes-youtube-transcript@latest --force
 
-# Maak een wrapper script voor de startup
-RUN echo '#!/bin/sh\npnpm install -g n8n-nodes-youtube-transcript@latest\nsu -c "n8n start" node' > /start.sh && \
-    chmod +x /start.sh
-
-# Gebruik het wrapper script als entrypoint
-ENTRYPOINT ["/start.sh"]
+USER node
