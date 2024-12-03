@@ -10,14 +10,9 @@ RUN apk update && \
 # Stel environment variables in
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
-
-# Maak een script aan dat de nodes installeert bij opstarten
-COPY <<EOF /docker-entrypoint.d/install-nodes.sh
-#!/bin/sh
-cd /usr/local/lib/node_modules/n8n
-npm install n8n-nodes-youtube-transcript@latest
-EOF
-
-RUN chmod +x /docker-entrypoint.d/install-nodes.sh
+ENV N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS=true
 
 USER node
+
+# Overschrijf het standaard command om eerst de nodes te installeren
+CMD cd /usr/local/lib/node_modules/n8n && npm install n8n-nodes-youtube-transcript@latest && n8n start
