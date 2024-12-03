@@ -11,7 +11,13 @@ RUN apk update && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Installeer de community nodes met force optie
-RUN npm install -g n8n-nodes-youtube-transcript@latest --force
+# Maak de nodes directory aan
+RUN mkdir -p /home/node/.n8n/nodes && \
+    chown -R node:node /home/node/.n8n
 
 USER node
+
+# Kopieer de nodes naar de juiste locatie
+RUN cd /home/node/.n8n/nodes && \
+    npm init -y && \
+    npm install n8n-nodes-youtube-transcript@latest
