@@ -20,4 +20,5 @@ USER node
 # Kopieer de nodes naar de juiste locatie
 RUN cd /home/node/.n8n/nodes && \
     npm init -y && \
-    npm install n8n-nodes-youtube-transcript@latest
+    npm install n8n-nodes-youtube-transcript@latest && \
+    npm install n8n-nodes-cloudconvert@latest
