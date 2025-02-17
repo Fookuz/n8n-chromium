@@ -21,5 +21,5 @@ USER node
 RUN cd /home/node/.n8n/nodes && \
     npm init -y && \
     npm install n8n-nodes-youtube-transcript@latest && \
-    npm install n8n-nodes-cloudconvert@latest
+    npm install n8n-nodes-cloudconvert@latest \
     npm install oauth-1.0a
