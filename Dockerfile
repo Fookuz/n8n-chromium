@@ -21,5 +21,8 @@ USER node
 RUN cd /home/node/.n8n/nodes && \
     npm init -y && \
     npm install n8n-nodes-youtube-transcript@latest && \
-    npm install n8n-nodes-cloudconvert@latest \
+    npm install n8n-nodes-cloudconvert@latest
+
+# Installeer oauth-1.0a in de hoofddirectory
+RUN cd /usr/local/lib/node_modules/n8n && \
     npm install oauth-1.0a
