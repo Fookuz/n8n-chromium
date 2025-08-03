@@ -14,11 +14,8 @@ RUN apk update && \
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ENV PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium-browser
 
-# Zorg voor juiste permissions
 RUN mkdir -p /home/node/.n8n && \
     chown -R node:node /home/node/.n8n
 
-USER node
-WORKDIR /home/node
-
-# Laat Railway de start command handelen
+# CRUCIAL: Stay as root user for Railway volume mount compatibility
+USER root
